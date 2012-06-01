@@ -1,0 +1,82 @@
+% bxzeal.sty
+
+%% package declaration
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bxzeal}[2012/06/01 v0.2]
+
+%-------------------
+
+\newif\ifbxqze@dvipdfmx \bxqze@dvipdfmxfalse
+\DeclareOption{dvipdfmx}{\bxqze@dvipdfmxtrue}
+\ProcessOptions*
+
+\ifbxqze@dvipdfmx
+  \AtBeginDvi{%
+    \special{pdf:mapline zlmr-r-l7c zr-l7c lmr10.pfb}%
+  }
+\fi
+
+%-------------------
+
+%% encoding declaration
+\DeclareFontEncoding{L7C}{}{}
+\DeclareTextSymbol{\textEreversed}{L7C}{29}
+\DeclareTextSymbol{\textereversed}{L7C}{26}
+\DeclareTextSymbol{\textschwa}{L7C}{27}
+
+%% font declaration
+\DeclareFontFamily{L7C}{zlmr}{}
+\DeclareFontSubstitution{L7C}{zlmr}{m}{n}
+\DeclareFontShape{L7C}{zlmr}{m}{n}{<->zlmr-r-l7c}{}
+\DeclareFontFamily{OT1}{zlmr}{}
+\DeclareFontShape{OT1}{zlmr}{m}{n}{<->s*lmr/m/n}{}
+\DeclareFontFamily{T1}{zlmr}{}
+\DeclareFontShape{T1}{zlmr}{m}{n}{<->s*lmr/m/n}{}
+
+%%<+> \ZealFont
+\DeclareRobustCommand*{\ZealFont}{\usefont{L7C}{zlmr}{m}{n}}
+
+%-------------------
+
+%% \bxqze@measure
+\def\bxqze@rata{0.57143}
+\def\bxqze@ratb{0.42857}
+\def\bxqze@ratc{0.08333}
+\def\bxqze@measure{%
+  \setbox\z@\hbox{\TeX}%
+  \setbox\tw@\hbox{T{}E{}X}%
+  \@tempdima\wd\tw@ \advance\@tempdima-\wd\z@
+  \@tempdimb\dp\z@ \advance\@tempdimb-\dp\tw@
+}
+
+%% \bxqze@Xe
+\def\bxqze@Xe{%
+  \ZealFont
+  \bxqze@measure
+  X\kern-\bxqze@ratb\@tempdima
+  \lower\@tempdimb\hbox{\textEreversed}%
+}
+
+%%<*> \XeTeX
+\providecommand*{\XeTeX}{\bxqze@XeTeX}
+\DeclareRobustCommand*{\bxqze@XeTeX}{%
+  \begingroup
+    \bxqze@Xe
+    \kern-\bxqze@rata\@tempdima
+    \TeX
+  \endgroup
+}
+
+%%<*> \XeLaTeX
+\providecommand*{\XeLaTeX}{\bxqze@XeLaTeX}
+\DeclareRobustCommand*{\bxqze@XeLaTeX}{%
+  \begingroup
+    \bxqze@Xe
+    \kern-\bxqze@ratc\@tempdima
+    \LaTeX
+  \endgroup
+}
+
+%-------------------
+\endinput
+%% EOF

@@ -1,0 +1,31 @@
+BXzeal package
+
+A perverse way to get XeTeX logo.
+
+* INSTALL
+
+  You need the Latin Modern Fonts (Type1) installed.
+
+  - bxzeal.sty ->      $TEXMF/tex/latex/BXzeal
+  - bxzeal.map ->      $TEXMF/fonts/map/dvips/BXzeal
+  - zlmr-r-l7c.tfm ->  $TEXMF/fonts/tfm/public/BXzeal
+  - zr-l7c.enc ->      $TEXMF/fonts/enc/dvips/BXzeal
+
+  Register bxzeal.map with your updmap.
+  (TeX Live: updmap(-sys) --enable Map=bxzeal.map)
+  (W32TeX: updmap --add bxzeal.map)
+
+* USAGE
+
+  Load the package in usual way.
+
+    \usepackage{bxzeal}
+
+  If you specify the option dvipdfmx, this package will work in using
+  dvipdfmx, even if you don't register the map file with updmap.
+
+    \Usepackage[dvipdfmx]{bxzeal}
+
+  The package provides only two commands, namely \XeTeX and \XeLaTeX,
+  whose meaning will be obvious!
+
